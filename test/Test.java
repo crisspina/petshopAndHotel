@@ -4,13 +4,16 @@ import Customers.Customers;
 import Customers.Pet;
 import Customers.PetType;
 import Customers.ReservedCustomers;
+import Dao.ReservedCustomerDao;
 import Room.RoomType;
+import dataaccess.ReservedCustomerDaoImp;
 import pethotel.PetHotel;
 
 
 public class Test {
-    
+     
     static void hotel() {
+        ReservedCustomerDao ResDao = new ReservedCustomerDaoImp();
         PetHotel p = new PetHotel("samsahai");
         System.out.println("----------HOTEL--------------");
         System.out.println(p);
@@ -105,6 +108,7 @@ public class Test {
         System.out.println("-----------------------hotel update after process: ");
         System.out.println(h5.hotelUpdate(p));
        
+        ResDao.addToReservedCustomer(rc2);
     }
 
     public static void main(String[] args) {

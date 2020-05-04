@@ -12,7 +12,6 @@ public interface ReservedCustomerDao {
     int removeFromReservedCustomer(ReservedCustomers obj);
     GeneralList<ReservedCustomers> findCustomerByname(Customers obj);
     GeneralList<ReservedCustomers> findCustomerByPetname(String name);   //all โดยชื่อสัตว์
-//  GeneralList<Activities> findProductListByCustomer(Customers cust);
 
     ReservedCustomers loadyourStatus(Customers obj); //1 person
     
