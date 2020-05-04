@@ -1,1 +1,1 @@
-petshopAndHotel
+PetsHotel
