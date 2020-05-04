@@ -9,13 +9,13 @@ public class ReservedCustomers {
 
     private RoomType resRoom;
     private Activities resAct;
-    private int countAct;
+    
     private Customers customer;
     private ReservedStatus status;
     private int amount;
 
     public ReservedCustomers() {
-        this.countAct = 0;
+     
     }
 
     public ReservedCustomers(RoomType resRoom, Customers customer) {
@@ -65,17 +65,9 @@ public class ReservedCustomers {
                 System.out.print( resAct);
                 System.out.print("-------------------"+"\n");
             }
-            if(choice>7){
-                System.out.println("error insert value between 1-7");
-            }
-
+           
             setStatus(ReservedStatus.PROCESSING);
                     } 
-
-    public int getCountAct() {
-        return countAct;
-    }
-
 
     public RoomType getResRoom(){
         return this.resRoom;

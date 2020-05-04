@@ -2,32 +2,27 @@ package CounterService;
 
 import Activities.ActivitiesFee;
 import Customers.ReservedCustomers;
-//import Room.HotelRoom;
 import Room.RoomInformation;
 import Room.RoomStatus;
 import Room.RoomType;
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import pethotel.PetHotel;
 
-public class HotelCounter implements Payment, ReserveOperation, Check {
+public class HotelCounter implements Payment, ReserveOperation, Check, Update {
 
     private PetHotel p;
     private ReservedCustomers rc;
+    private int amount;
 
     public HotelCounter(PetHotel petHotel, ReservedCustomers rc) {
         this.p = petHotel;
         this.rc = rc;
-
     }
 
     @Override
     public int checkBill(ReservedCustomers c) {
         int price = 0;
-        int amount;
         switch (c.getResRoom()) {
             case DELUXE:
                 price += RoomInformation.DELUXE_ROOM_PER_NIGHT;
@@ -80,83 +75,53 @@ public class HotelCounter implements Payment, ReserveOperation, Check {
 
     @Override
     public void printSlip(ReservedCustomers c) {
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream("CustomersSlip/" + c.getCustomers().getCustomerID() + "slip.txt",true);
-         /*   BufferedOutputStream bos = new BufferedOutputStream(fos);
-            java.io.ObjectOutputStream oos = new java.io.ObjectOutputStream(bos);*/
-
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        PrintWriter pw = new PrintWriter(fos);
-        pw.println("YOUR RESERVED INFORMATION");
+       FileWriter fw = null;
+       
+       try{
+       fw = new FileWriter("customersSlip"+((c.getCustomers()).getCustomerID())+".txt");
+       fw.write("YOUR RESERVED INFORMATION \n");
+       fw.flush();
         switch (c.getResRoom()) {
             case DELUXE:
-                pw.println("Deluxe Room" + RoomInformation.DELUXE_ROOM_PER_NIGHT + "baht");
+                fw.write("Deluxe Room " + RoomInformation.DELUXE_ROOM_PER_NIGHT + " baht \n");fw.flush();
                 break;
             case STANDARD:
-                pw.println("Standard Room" + RoomInformation.STANDARD_ROOM_PER_NIGHT + "baht");
+                fw.write("Standard Room " + RoomInformation.STANDARD_ROOM_PER_NIGHT + " baht \n");fw.flush();
                 break;
             default:
-                pw.println("Superior Room" + RoomInformation.SUPERIOR_ROOM_PER_NIGHT + "baht");
+                fw.write("Superior Room " + RoomInformation.SUPERIOR_ROOM_PER_NIGHT + " baht \n");fw.flush();
                 break;
         }
 
-        pw.print("Reserved Acitvities for your pet");
-        if (c.getCountAct() == 0) {
-            System.out.println("you didnt reserved any activity");
-        } else {
+        fw.write("Reserved Acitvities for your pet \n");
+
                 switch (c.getResAct()) {
                     case GROOMING:
-                        pw.println("Grooming" + ActivitiesFee.GROOMING + "baht");
+                        fw.write("Grooming " + ActivitiesFee.GROOMING + " baht \n");fw.flush();
                         break;
                     case PLAYTIME:
-                        pw.println("Playtime" + ActivitiesFee.PLAYTIME + "baht");
+                        fw.write("Playtime " + ActivitiesFee.PLAYTIME + " baht \n");fw.flush();
                         break;
                     case EXERCISE:
-                        pw.println("Exercise" + ActivitiesFee.EXERCISE + "baht");
+                        fw.write("Exercise " + ActivitiesFee.EXERCISE + " baht \n");fw.flush();
                         break;
                     case MESSAGEANDSPA:
-                        pw.println("Message and spa" + ActivitiesFee.MESSAGEANDSPA + "baht");
+                        fw.write("Message and spa " + ActivitiesFee.MESSAGEANDSPA + "baht \n");fw.flush();
                         break;
                     case GARDEN:
-                        pw.println("Garden" + ActivitiesFee.GARDEN + "baht");
+                         fw.write("Garden " + ActivitiesFee.GARDEN + " baht \n");fw.flush();
                         break;
                     case PHOTOSET:
-                        pw.println("Photoset" + ActivitiesFee.PHOTOSET + "baht");
+                       fw.write("Photoset " + ActivitiesFee.PHOTOSET + " baht \n");fw.flush();
                         break;
-                    default:
-                        pw.println("You reserved no activity for your pet");
-                
-            }
-         pw.close();       
- /*private static void viewOrder() throws IOException {
-//        FileWriter writer = new FileWriter("/doc/order.txt");
-        Path path = Paths.get(user.toString());
-        String textPath = path.toString() + ".txt";
-
-        PrintWriter writer = new PrintWriter(textPath);
-        for (String line : orderList) {
-            writer.println(line);
+        } 
+              fw.write("total: "+amount);fw.flush();   
+        System.out.println("-----------check your slip at CustomerSlip/ your customer id .txt--------------------");
+   
+    }   catch (IOException ex) {
+             System.out.println(ex.getMessage());
         }
-        writer.close();
-
-        BufferedReader br = new BufferedReader(new FileReader(textPath));
-
-        String st;
-        while ((st = br.readLine()) != null) {
-            System.out.println(st);
-        }
-
-        orderShabu();
-    }*/
-        }
-
     }
-
    @Override
     public void reserved(PetHotel petHotel,ReservedCustomers c) {
         if (!(checkIsFull(petHotel,c)) || (checkReserveHistory(petHotel,c))) {
@@ -175,7 +140,7 @@ public class HotelCounter implements Payment, ReserveOperation, Check {
                 for (int i = 0; i < petHotel.getHr().getSupRoomLength(); i++) {
                     if (petHotel.getHr().getSupRooms(i).getStatus().equals(RoomStatus.FULL)) {
                         continue;
-                    }else if(petHotel.getHr().getdRooms(i).getStatus().equals(RoomStatus.AVAILABLE)){
+                    }else if(petHotel.getHr().getSupRooms(i).getStatus().equals(RoomStatus.AVAILABLE)){
                     (petHotel.getHr()).setSupRoom(i, c);
                     (petHotel.getHr()).addCountSup();
                     (petHotel.getHr()).getSupRooms(i).setStatus(RoomStatus.FULL);
@@ -207,45 +172,34 @@ public class HotelCounter implements Payment, ReserveOperation, Check {
             return;
         } else {
             if (c.getResRoom().equals(RoomType.DELUXE)) {
+                for (int i = 0; i < petHotel.getHr().getCountDe(); i++) {
+                    if (petHotel.getHr().getdRooms(i).getRc().getCustomers().getPet().equals(c.getCustomers().getPet())) {
                 ((petHotel.getHr()).getdRooms(search(petHotel, c))).setStatus(RoomStatus.AVAILABLE);
                 (petHotel.getHr()).setdRoom(search(petHotel, c), null);
                 (petHotel.getHr()).minusCountDe();
-
-//                recallRoom(c);
                 setStatustoReservedCustomers(petHotel, c);
+                    }
+                }
+                
             } else if (c.getResRoom().equals(RoomType.STANDARD)) {
-                ((petHotel.getHr()).getStdRooms(search(petHotel, c))).setStatus(RoomStatus.AVAILABLE);
+                for (int i = 0; i < petHotel.getHr().getCountStd(); i++) {
+                    ((petHotel.getHr()).getStdRooms(search(petHotel, c))).setStatus(RoomStatus.AVAILABLE);
                 (petHotel.getHr()).setStdRoom(search(petHotel, c), null);
                 (petHotel.getHr()).minusCountStd();
-//                recallRoom(c);
                 setStatustoReservedCustomers(petHotel, c);
+                }
+
             } else if (c.getResRoom().equals(RoomType.SUPERIOR)) {
                 ((petHotel.getHr()).getSupRooms(search(petHotel, c))).setStatus(RoomStatus.AVAILABLE);
                 (petHotel.getHr()).setSupRoom(search(petHotel, c), null);
                 (petHotel.getHr()).minusCountSup();
-//                recallRoom(c);
+
                 setStatustoReservedCustomers(petHotel, c);
             }
             System.out.println("cancelled sucessfully");
             return;
         }
     }
-
-//    public void recallRoom(ReservedCustomers failcus) {
-//        if (failcus.getStatus().equals(ReservedStatus.FAIL) && failcus.getResRoom().equals(RoomType.DELUXE) 
-//                && (checkIsFull(failcus) == false)) {
-//            reserved(failcus);
-//
-//        } else if (failcus.getStatus().equals(ReservedStatus.FAIL) && failcus.getResRoom().equals(RoomType.STANDARD) 
-//                && (checkIsFull(failcus) == false)) {
-//            reserved(failcus);
-//
-//        } else if (failcus.getStatus().equals(ReservedStatus.FAIL) && failcus.getResRoom().equals(RoomType.SUPERIOR) 
-//                && (checkIsFull(failcus) == false)) {
-//            reserved(failcus);
-//
-//        }
-//    }
     @Override
     public int search(PetHotel petHotel, ReservedCustomers c) {
         int i = 0;
@@ -334,47 +288,35 @@ public class HotelCounter implements Payment, ReserveOperation, Check {
         switch (c.getResRoom()) {
             case DELUXE:
                 if ((petHotel.getHr()).getCountDe() == RoomInformation.MAX_DELUXE) {
-                    c.setStatus(ReservedStatus.PROCESSING);
+                    c.setStatus(ReservedStatus.FULL);
                 } else {
                     c.setStatus(ReservedStatus.SUCESS);
                 }
             case SUPERIOR:
                 if ((petHotel.getHr()).getCountSup() == RoomInformation.MAX_SUPERIOR) {
-                    c.setStatus(ReservedStatus.PROCESSING);
+                    c.setStatus(ReservedStatus.FULL);
                 } else {
                     c.setStatus(ReservedStatus.SUCESS);
                 }
             case STANDARD:
                 if ((petHotel.getHr()).getCountStd() == RoomInformation.MAX_STANDARD) {
-                    c.setStatus(ReservedStatus.PROCESSING);
+                    c.setStatus(ReservedStatus.FULL);
                 } else {
                     c.setStatus(ReservedStatus.SUCESS);
                 }
         }
-
-//        if(c.getResRoom().equals(RoomType.DELUXE)){
-//              if (petHotel.getHr().getCountDe()==RoomInformation.MAX_DELUXE) {
-//                  c.setStatus(ReservedStatus.FULL);
-//              } else if(c.getResRoom().equals(RoomType.SUPERIOR)){
-//                c.setStatus(ReservedStatus.FULL);
-//              }else if(c.getResRoom().equals(RoomType.SUPERIOR)){
-//              c.setStatus(ReservedStatus.FULL);
-//              }
-//          }
-//        if (checkIsFull(petHotel,c)) {
-//            c.setStatus(ReservedStatus.FULL);
-//        } else {
-//            c.setStatus(ReservedStatus.SUCESS);
-//        }
     }
 
+    @Override
     public String cusUpdate(ReservedCustomers c) {
         this.rc = c;
         return rc.toString();
     }
 
+    @Override
     public String hotelUpdate(PetHotel petHotel) {
         this.p = petHotel;
         return petHotel.toString();
     }
 }
+
