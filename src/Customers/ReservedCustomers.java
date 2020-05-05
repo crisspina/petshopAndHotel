@@ -28,51 +28,10 @@ public class ReservedCustomers {
     public ReservedCustomers(RoomType resRoom, Customers customer) {
         this.resRoom = resRoom;
         this.customer = customer;
-        setReservedActivities();
     }
 
-    public void setReservedActivities() {
-        int choice = 0;
-        Scanner sn = new Scanner(System.in);
-        System.out.println("choosing Activities: ");
-        System.out.println("\t 1. GROOMING");
-        System.out.println("\t 2. PLAYTIME");
-        System.out.println("\t 3. GARDEN");
-        System.out.println("\t 4. EXERCISE");
-        System.out.println("\t 5. MESSAGEANDSPA");
-        System.out.println("\t 6. PHOTOSET");
-        System.out.print("Enter your number activities: ");
-
-        choice = sn.nextInt();
-        switch (choice) {
-            case 1:
-                this.resAct = Activities.GROOMING;
-                break;
-
-            case 2:
-                this.resAct = Activities.PLAYTIME;
-                break;
-            case 3:
-                this.resAct = Activities.GARDEN;
-                break;
-            case 4:
-                this.resAct = Activities.EXERCISE;
-                break;
-            case 5:
-                this.resAct = Activities.MESSAGEANDSPA;
-                break;
-            case 6:
-                this.resAct = Activities.PHOTOSET;
-                break;
-
-        }
-        if (choice <= 6) {
-
-            System.out.print("---------Activities for your pet: ");
-            System.out.print(resAct);
-            System.out.print("-------------------" + "\n");
-        }
-
+    public void setReservedActivities(Activities act) {
+          this.resAct = act;
         setStatus(ReservedStatus.PROCESSING);
     }
 
