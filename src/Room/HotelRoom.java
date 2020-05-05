@@ -1,8 +1,7 @@
 package Room;
 
-import Customers.Customers;
+
 import Customers.ReservedCustomers;
-import java.util.Iterator;
 
 public class HotelRoom{
 
@@ -120,30 +119,30 @@ public class HotelRoom{
         sb.append("Deluxe Room: ");
         sb.append("We have " + (RoomInformation.MAX_DELUXE-countDe) + " rooms");
         sb.append("\n");
-        sb.append("There are: ");
-        for (int i = 0; i < dRooms.length; i++) {
-            sb.append(dRooms[i].toString());
-            sb.append("\t");
-        }
-        sb.append("\n");
+//        sb.append("There are: ");
+//        for (int i = 0; i < dRooms.length; i++) {
+//            sb.append(dRooms[i].toString());
+//            sb.append("\t");
+//        }
+//        sb.append("\n");
         sb.append("Superior Room: ");
         sb.append("We have " + (RoomInformation.MAX_SUPERIOR-countSup) + " rooms");
         sb.append("\n"); 
-        sb.append("There are: ");
-        for (int i = 0; i < supRooms.length; i++) {
-            sb.append(supRooms[i].toString());
-             sb.append("\t");
-        }
-        sb.append("\n");
+//        sb.append("There are: ");
+//        for (int i = 0; i < supRooms.length; i++) {
+//            sb.append(supRooms[i].toString());
+//             sb.append("\t");
+//        }
+//        sb.append("\n");
         sb.append("Standard Room: ");
         sb.append("We have " + (RoomInformation.MAX_STANDARD-countStd) + " rooms");
         sb.append("\n");
-        sb.append("There are: ");
-        for (int i = 0; i < stdRooms.length; i++) {
-            sb.append(stdRooms[i].toString());
-             sb.append("\t");
-        }
-        sb.append("\n");
+//        sb.append("There are: ");
+//        for (int i = 0; i < stdRooms.length; i++) {
+//            sb.append(stdRooms[i].toString());
+//             sb.append("\t");
+//        }
+//        sb.append("\n");
         return sb.toString();
     }
 

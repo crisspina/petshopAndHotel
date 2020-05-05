@@ -15,9 +15,9 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
     private ReservedCustomers rc;
     private int amount;
 
-    public HotelCounter() {
-
-    }
+//    public HotelCounter() {
+//
+//    }
 
     public HotelCounter(PetHotel petHotel, ReservedCustomers rc) {
         this.p = petHotel;
