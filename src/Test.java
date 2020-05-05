@@ -14,14 +14,14 @@ import java.util.Scanner;
 
 public class Test {    
     static String menu = "-----------<<PETS HOTEL>>----------\n"
-            + "1. Booking The Hotel\n"  //create customer, add pet,add activities , addroom ,check room
+            + "1. Booking The Hotel\n"  //create customer, add pet,add activities , addroom
             + "2. Check room\n" //เช็คห้องว่าว่างมั้ย คือ HotelUpdate()
             + "3. Check your Status\n" //กรอกไอดี
             + "4. Cancel Booking\n" // Cancel() obj.hotel , obj.customer +  
             + "0. exit\n"
             + ">>>>>Select menu: ";
     static Scanner input = new Scanner(System.in);
-
+    
     public static void main(String[] args) {    
         int select;
         do {  
@@ -151,7 +151,6 @@ public class Test {
                 break;
         }
         System.out.println("_______________________________");
-        
 //        RC = new ;
 //        ReservedCustomerDao ResDao = new ReservedCustomerDaoImp();
 //        ResDao.addToReservedCustomer(RC);
@@ -159,7 +158,9 @@ public class Test {
     }
 
     private static void checkRoomStatus() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HotelCounter hc = new HotelCounter();
+        PetHotel p = new PetHotel("samsahai");
+        hc.hotelUpdate(p);
     }
 
     private static void checkMyStatus() {
