@@ -115,8 +115,9 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
                        fw.write("Photoset " + ActivitiesFee.PHOTOSET + " baht \n");fw.flush();
                         break;
         } 
-              fw.write("total: "+amount);fw.flush();   
-        System.out.println("-----------check your slip at CustomerSlip/ your customer id .txt--------------------");
+              fw.write("total: "+amount +"bath \n");fw.flush();
+              fw.write("your reserved status: " + c.getStatus());fw.flush();
+        System.out.println("-----------check your slip at customerSlip+your customer id .txt--------------------");
    
     }   catch (IOException ex) {
              System.out.println(ex.getMessage());
@@ -177,7 +178,8 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
                 ((petHotel.getHr()).getdRooms(search(petHotel, c))).setStatus(RoomStatus.AVAILABLE);
                 (petHotel.getHr()).setdRoom(search(petHotel, c), null);
                 (petHotel.getHr()).minusCountDe();
-                setStatustoReservedCustomers(petHotel, c);
+                    c.setAmount(0);
+                    c.setStatus(ReservedStatus.CANCELLED);
                     }
                 }
                 
@@ -186,15 +188,16 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
                     ((petHotel.getHr()).getStdRooms(search(petHotel, c))).setStatus(RoomStatus.AVAILABLE);
                 (petHotel.getHr()).setStdRoom(search(petHotel, c), null);
                 (petHotel.getHr()).minusCountStd();
-                setStatustoReservedCustomers(petHotel, c);
+                    c.setAmount(0);
+                    c.setStatus(ReservedStatus.CANCELLED);
                 }
 
             } else if (c.getResRoom().equals(RoomType.SUPERIOR)) {
                 ((petHotel.getHr()).getSupRooms(search(petHotel, c))).setStatus(RoomStatus.AVAILABLE);
                 (petHotel.getHr()).setSupRoom(search(petHotel, c), null);
                 (petHotel.getHr()).minusCountSup();
-
-                setStatustoReservedCustomers(petHotel, c);
+                    c.setAmount(0);
+                    c.setStatus(ReservedStatus.CANCELLED);  
             }
             System.out.println("cancelled sucessfully");
             return;
