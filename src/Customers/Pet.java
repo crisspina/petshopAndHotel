@@ -8,17 +8,14 @@ public class Pet {
     private String name;
     private String age;
     private PetType type;
-    private String ownerPhoneNumber;
-
     
     public Pet(){
     
 }
-    public Pet(String name, String age,PetType type,String ownerPhoneNumber) {
+    public Pet(String name, String age,PetType type) {
         this.name = name;
         this.age = age;
         this.type=type;
-        this.ownerPhoneNumber=ownerPhoneNumber;
     }
 
     public String getName() {
@@ -32,12 +29,6 @@ public class Pet {
     public PetType getType() {
         return type;
     }
-
-    public String getOwnerPhoneNumber() {
-        return ownerPhoneNumber;
-    }
-
-    
 
     @Override
     public String toString() {

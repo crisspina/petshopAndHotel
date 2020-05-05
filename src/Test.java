@@ -45,26 +45,10 @@ public class Test {
     }
 
     private static void createNewCustomer() {
-        Customers C = null ;
         Scanner sn = new Scanner(System.in);
-        System.out.println("-----Create new Customer-----");
-        System.out.print("Enter first name: ");
-        String fName = sn.nextLine();
-        
-        System.out.print("Enter last name: ");
-        String lName = sn.nextLine();
-
-        System.out.print("Enter phone number: ");
-        String phoneNumber = sn.nextLine();
-
-        System.out.print("Enter Customer ID: ");
-        int CustomerID = sn.nextInt();
-
-        System.out.println("_______________________________");
-        
+        PetType petType=null;
         
         System.out.println("-----Add PET-----");
-        PetType pet;
         System.out.print("Enter pet name: ");
         String name = sn.nextLine();
 
@@ -81,23 +65,41 @@ public class Test {
         choicePet = sn.nextInt();
         switch (choicePet) {
             case 1:
-                pet = PetType.DOG;
+                petType = PetType.DOG;
                 break;
             case 2:
-                pet = PetType.CAT;
+                petType = PetType.CAT;
                 break;
             case 3:
-                pet = PetType.RABBIT;
+                petType = PetType.RABBIT;
                 break;
             case 4:
-                pet = PetType.RACOON;
+                petType = PetType.RACOON;
                 break;
         }
+        Pet pet = new Pet(name, age, petType);
+        System.out.println("_______________________________");
+        
+        
+        System.out.println("-----Create new Customer-----");
+        System.out.print("Enter first name: ");
+        String fName = sn.nextLine();
+        
+        System.out.print("Enter last name: ");
+        String lName = sn.nextLine();
 
+        System.out.print("Enter phone number: ");
+        String phoneNumber = sn.nextLine();
+
+        System.out.print("Enter Customer ID: ");
+        String CustomerID = sn.nextLine();
+        
+        Customers C = new Customers( CustomerID, fName, lName,pet);
         System.out.println("_______________________________");
         
         System.out.println("-----Add Activities for your pet-----");
         Activities Act;
+        ReservedCustomers rc = new ReservedCustomers();
         int choiceAct;
         System.out.println("Activities: ");
         System.out.println("\t 1. GROOMING");
@@ -111,21 +113,27 @@ public class Test {
         switch (choiceAct) {
             case 1:
                 Act = Activities.GROOMING;
+                rc.setReservedActivities(Act);
                 break;
             case 2:
                Act = Activities.PLAYTIME;
+               rc.setReservedActivities(Act);
                 break;
             case 3:
                 Act = Activities.GARDEN;
+                rc.setReservedActivities(Act);
                 break;
             case 4:
                  Act = Activities.EXERCISE;
+                 rc.setReservedActivities(Act);
                 break;
             case 5:
                  Act = Activities.MESSAGEANDSPA;
+                 rc.setReservedActivities(Act);
                  break;
             case 6:
                  Act = Activities.PHOTOSET;
+                 rc.setReservedActivities(Act);
                  break;
     }
         System.out.println("_______________________________");
@@ -150,6 +158,7 @@ public class Test {
                 room = RoomType.STANDARD;
                 break;
         }
+        
         System.out.println("_______________________________");
 //        RC = new ;
 //        ReservedCustomerDao ResDao = new ReservedCustomerDaoImp();
@@ -164,11 +173,14 @@ public class Test {
     }
 
     private static void checkMyStatus() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     private static void cancelBooking() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HotelCounter hc = new HotelCounter();
+        PetHotel p = new PetHotel("samsahai");
+        ReservedCustomers rc = new ReservedCustomers();
+        hc.cancelled(p,rc);
     }
 //
 //    public void test(){
