@@ -2,5 +2,5 @@
 package CounterService;
 
 public enum ReservedStatus {
-    SUCESS,PROCESSING,FULL,CANCELLED;
+    SUCCESS,PROCESSING,FULL,CANCELLED;
 }

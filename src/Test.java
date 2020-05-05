@@ -97,7 +97,6 @@ public class Test {
 
     public static ReservedCustomers reCus() {
         ReservedCustomers recus ;
-
         Scanner sc = new Scanner(System.in);
         ReservedCustomers reCus = null;
         Customers customer = addCust();
@@ -113,7 +112,6 @@ public class Test {
         switch (choiceRoom) {
             case 1:
                 room = RoomType.DELUXE;
-                System.out.println("Test");
                 reCus = new ReservedCustomers(room, customer);
                 break;
             case 2:
@@ -170,10 +168,20 @@ public class Test {
 
     }
 
-    public static ReservedCustomers Cancelled() {
-        ReservedCustomers rc = null;
-        HotelCounter hc = hotelCounter();
+    public static void hotelCounter() {
+        HotelCounter hotelCounter = null;
         ReservedCustomerDao resDao = new ReservedCustomerDaoImp();
+        ReservedCustomers reservedCustomers = reCus();
+        hotelCounter = new HotelCounter(petHotel, reservedCustomers);
+        System.out.println( hotelCounter.hotelUpdate() );
+        
+        hotelCounter.reserved();
+        hotelCounter.checkBill();
+        
+        resDao.addToReservedCustomer(reservedCustomers);
+        System.out.println(reservedCustomers.toString());
+        
+//        Cancelled();
         System.out.println("Do you want to cancel the reservation?");
         System.out.println("1.No");
         System.out.println("2.Yes");
@@ -182,27 +190,20 @@ public class Test {
         switch (menu) {
             case 1:
                 System.out.println("reservation confirmmed");
-                return rc;
+                System.out.println(hotelCounter.cusUpdate());
+                System.out.println(hotelCounter.hotelUpdate());
+               menu();
+
 
             case 2:
-                hc.cancelled();
-                resDao.removeFromReservedCustomer(rc);
+              resDao.removeFromReservedCustomer(reservedCustomers); 
+                hotelCounter.cancelled();
+                System.out.println(hotelCounter.hotelUpdate());
+                System.out.println(hotelCounter.cusUpdate());
+                 
+                
+                menu();
                 break;
         }
-        return rc;
-    }
-
-    public static HotelCounter hotelCounter() {
-        HotelCounter hotelCounter = null;
-        ReservedCustomerDao resDao = new ReservedCustomerDaoImp();
-        ReservedCustomers reservedCustomers = reCus();
-        hotelCounter = new HotelCounter(petHotel, reservedCustomers);
-        System.out.println( hotelCounter.hotelUpdate() );
-        hotelCounter.reserved();
-        hotelCounter.checkBill();
-        resDao.addToReservedCustomer(reservedCustomers);
-        System.out.println(reservedCustomers.toString());
- 
-        return hotelCounter;
     }
 }

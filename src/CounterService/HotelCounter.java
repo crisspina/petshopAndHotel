@@ -15,10 +15,6 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
     private ReservedCustomers rc;
     private int amount;
 
-//    public HotelCounter() {
-//
-//    }
-
     public HotelCounter(PetHotel petHotel, ReservedCustomers rc) {
         this.p = petHotel;
         this.rc = rc;
@@ -100,7 +96,7 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
                     break;
             }
 
-            fw.write("Reserved Acitvities for your pet \n");
+            fw.write("Reserved Activities for your pet \n");
 
             switch (rc.getResAct()) {
                 case GROOMING:
@@ -128,7 +124,7 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
                     fw.flush();
                     break;
             }
-            fw.write("total: " + amount + "bath \n");
+            fw.write("total: " + amount + "baht \n");
             fw.flush();
             fw.write("your reserved status: " + rc.getStatus());
             fw.flush();
@@ -230,10 +226,12 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
         if (rc.getResRoom().equals(RoomType.DELUXE)) {
             if ((p.getHr()).getCountDe() != 0) {
                 for (i = 0; i < p.getHr().getCountDe(); i++) {
-                    if (p.getHr().getdRooms(i).getRc().getCustomers().getPet() == null) {
-
-                        continue;
-                    } else if ((rc.getCustomers().getPet()).equals(p.getHr().getdRooms(i).getRc().getCustomers().getPet())) {
+//                    if (p.getHr().getdRooms(i).getRc().getCustomers().getPet() == null) {
+//
+//                        continue;
+//                    } 
+//                     else 
+                    if ((rc.getCustomers().getPet()).equals(p.getHr().getdRooms(i).getRc().getCustomers().getPet())) {
                         return i;
                     }
                     System.out.println("search not found");
@@ -246,10 +244,11 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
         } else if (rc.getResRoom().equals(RoomType.SUPERIOR)) {
             if ((p.getHr().getCountSup() != 0)) {
                 for (i = 0; i < p.getHr().getCountSup(); i++) {
-                    if (p.getHr().getdRooms(i).getRc().getCustomers().getPet() == null) {
-                        System.out.println("not found");
-                        continue;
-                    } else if ((rc.getCustomers().getPet()).equals(p.getHr().getSupRooms(i).getRc().getCustomers().getPet())) {
+//                    if (p.getHr().getdRooms(i).getRc().getCustomers().getPet() == null) {
+//                        System.out.println("not found");
+//                        continue;
+//                    } else 
+                        if ((rc.getCustomers().getPet()).equals(p.getHr().getSupRooms(i).getRc().getCustomers().getPet())) {
                         return i;
                     }
                     System.out.println("search not found");
@@ -262,10 +261,11 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
         } else if (rc.getResRoom().equals(RoomType.STANDARD)) {
             if ((p.getHr()).getCountStd() != 0) {
                 for (i = 0; i < p.getHr().getCountStd(); i++) {
-                    if (p.getHr().getdRooms(i).getRc().getCustomers().getPet() == null) {
-                        System.out.println("not found");
-                        continue;
-                    } else if ((rc.getCustomers().getPet()).equals(p.getHr().getStdRooms(i).getRc().getCustomers().getPet())) {
+//                    if (p.getHr().getdRooms(i).getRc().getCustomers().getPet() == null) {
+//                        System.out.println("not found");
+//                        continue;
+//                    } else 
+                        if ((rc.getCustomers().getPet()).equals(p.getHr().getStdRooms(i).getRc().getCustomers().getPet())) {
                         return i;
                     }
                     System.out.println("search not found");
@@ -314,19 +314,19 @@ public class HotelCounter implements Payment, ReserveOperation, Check, Update {
                 if ((p.getHr()).getCountDe() == RoomInformation.MAX_DELUXE) {
                     rc.setStatus(ReservedStatus.FULL);
                 } else {
-                    rc.setStatus(ReservedStatus.SUCESS);
+                    rc.setStatus(ReservedStatus.SUCCESS);
                 }
             case SUPERIOR:
                 if ((p.getHr()).getCountSup() == RoomInformation.MAX_SUPERIOR) {
                     rc.setStatus(ReservedStatus.FULL);
                 } else {
-                    rc.setStatus(ReservedStatus.SUCESS);
+                    rc.setStatus(ReservedStatus.SUCCESS);
                 }
             case STANDARD:
                 if ((p.getHr()).getCountStd() == RoomInformation.MAX_STANDARD) {
                     rc.setStatus(ReservedStatus.FULL);
                 } else {
-                    rc.setStatus(ReservedStatus.SUCESS);
+                    rc.setStatus(ReservedStatus.SUCCESS);
                 }
         }
     }
