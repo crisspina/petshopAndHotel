@@ -8,21 +8,27 @@ public class Customers {
     private String IdNumber;
     private String fName;
     private String lName;
+    private String phoneNumber;
     private Pet pet;
 
     public Customers(){
         
     }
-    
-    public Customers(String IdNumber, String fName, String lName, Pet pet) {
+
+    public Customers(String IdNumber, String fName, String lName, String phoneNumber, Pet pet) {
         this.IdNumber = IdNumber;
         this.fName = fName;
         this.lName = lName;
+        this.phoneNumber = phoneNumber;
         this.pet = pet;
     }
 
     public String getfName() {
         return fName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getlName() {
