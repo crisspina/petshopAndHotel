@@ -23,11 +23,9 @@ public class Test {
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {    
-        
-        
         int select;
         do {  
-            System.out.println("Select");
+            System.out.println("Select: ");
             select = input.nextInt();
             switch (select) {
                 case 1:
@@ -66,33 +64,33 @@ public class Test {
         
         
         System.out.println("-----Add PET-----");
-        PetType type2;
+        PetType pet;
         System.out.print("Enter pet name: ");
         String name = sn.nextLine();
 
         System.out.print("Enter pet age: ");
         String age = sn.nextLine();
 
-        int choice;
+        int choicePet;
         System.out.println("Pet type: ");
         System.out.println("\t 1. DOG ");
         System.out.println("\t 2. CAT ");
         System.out.println("\t 3. RABBIT");
         System.out.println("\t 4. RACOON ");
-        System.out.print("Enter your number pet type: ");
-        choice = sn.nextInt();
-        switch (choice) {
+        System.out.print("Enter your number Pet type: ");
+        choicePet = sn.nextInt();
+        switch (choicePet) {
             case 1:
-                type2 = PetType.DOG;
+                pet = PetType.DOG;
                 break;
             case 2:
-                type2 = PetType.CAT;
+                pet = PetType.CAT;
                 break;
             case 3:
-                type2 = PetType.RABBIT;
+                pet = PetType.RABBIT;
                 break;
             case 4:
-                type2 = PetType.RACOON;
+                pet = PetType.RACOON;
                 break;
         }
 
@@ -132,7 +130,28 @@ public class Test {
     }
         System.out.println("_______________________________");
         
-       
+        System.out.println("-----Add Room-----");
+        RoomType room;
+        int choiceRoom;
+        System.out.println("Room: ");
+        System.out.println("\t 1. DELUXE");
+        System.out.println("\t 2. SUPERIOR");
+        System.out.println("\t 3. STANDARD");
+        System.out.print("Enter your number Room: ");
+        choiceRoom = sn.nextInt();
+        switch (choiceRoom){
+            case 1:
+                room = RoomType.DELUXE;
+                break;
+            case 2:
+                room = RoomType.SUPERIOR;
+                break;
+            case 3:
+                room = RoomType.STANDARD;
+                break;
+        }
+        System.out.println("_______________________________");
+        
 //        RC = new ;
 //        ReservedCustomerDao ResDao = new ReservedCustomerDaoImp();
 //        ResDao.addToReservedCustomer(RC);
