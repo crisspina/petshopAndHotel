@@ -3,7 +3,6 @@ package Customers;
 import Activities.Activities;
 import CounterService.ReservedStatus;
 import Room.RoomType;
-import java.util.Scanner;
 
 public class ReservedCustomers {
 

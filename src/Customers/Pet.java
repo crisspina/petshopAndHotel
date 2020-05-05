@@ -1,9 +1,6 @@
 
 package Customers;
 
-import java.util.Objects;
-import java.util.Scanner;
-
 public class Pet {
     private String name;
     private String age;

@@ -62,7 +62,7 @@ public class DatabaseInitialization {
             try {
                 if (show) {
                     System.out.println("\n--- Import Customer2 ---");
-                    sc = new Scanner(new File("file/customer2"));
+                    sc = new Scanner(new File("file/customers"));
                     String line;
                     try {
                         while ((line = sc.nextLine()) != null) {

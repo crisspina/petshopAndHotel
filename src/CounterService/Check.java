@@ -8,8 +8,8 @@ import pethotel.PetHotel;
 
 public interface Check{
     
-    public  boolean checkReserveHistory(PetHotel p,ReservedCustomers c);
-    public  boolean checkIsFull(PetHotel p,ReservedCustomers c);
+    public  boolean checkReserveHistory();
+    public  boolean checkIsFull();
    
     
 }
