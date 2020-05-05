@@ -13,6 +13,7 @@ import java.util.Scanner;
 
 
 public class Test {    
+    
     static String menu = "-----------<<PETS HOTEL>>----------\n"
             + "1. Booking The Hotel\n"  //create customer, add pet,add activities , addroom
             + "2. Check room\n" //เช็คห้องว่าว่างมั้ย คือ HotelUpdate()
@@ -94,7 +95,7 @@ public class Test {
         System.out.print("Enter Customer ID: ");
         String CustomerID = sn.nextLine();
         
-        Customers C = new Customers( CustomerID, fName, lName,pet);
+        Customers C = new Customers( CustomerID, fName, lName,phoneNumber,pet);
         System.out.println("_______________________________");
         
         System.out.println("-----Add Activities for your pet-----");
@@ -167,9 +168,11 @@ public class Test {
     }
 
     private static void checkRoomStatus() {
+
         HotelCounter hc = new HotelCounter();
         PetHotel p = new PetHotel("samsahai");
         hc.hotelUpdate(p);
+
     }
 
     private static void checkMyStatus() {
