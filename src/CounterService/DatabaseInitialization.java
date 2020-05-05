@@ -31,7 +31,7 @@ public class DatabaseInitialization {
             }
 
             try {
-                stm.executeUpdate("CREATE TABLE Customers2 (IdNumber INT NOT NULL,"
+                stm.executeUpdate("CREATE TABLE Customers2 (IdNumber VARCHAR(50) NOT NULL,"
                         + " Firstname VARCHAR(50) ,"
                         + " Lastname VARCHAR(50) , "
                         + " phoneNumber INT NOT NULL, "
@@ -67,7 +67,7 @@ public class DatabaseInitialization {
                     try {
                         while ((line = sc.nextLine()) != null) {
                             String[] temp = line.split(",");
-                            stmC2.setInt(1, Integer.parseInt(temp[0]));
+                            stmC2.setString(1, temp[0]);
                             stmC2.setString(2, temp[1]);
                             stmC2.setString(3, temp[2]);
                             stmC2.setInt(4, Integer.parseInt(temp[3]));

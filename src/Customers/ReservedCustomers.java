@@ -9,13 +9,20 @@ public class ReservedCustomers {
 
     private RoomType resRoom;
     private Activities resAct;
-    
     private Customers customer;
     private ReservedStatus status;
     private int amount;
 
     public ReservedCustomers() {
-     
+
+    }
+
+    public ReservedCustomers(RoomType resRoom, Activities resAct, Customers customer, ReservedStatus status, int amount) {
+        this.resRoom = resRoom;
+        this.resAct = resAct;
+        this.customer = customer;
+        this.status = status;
+        this.amount = amount;
     }
 
     public ReservedCustomers(RoomType resRoom, Customers customer) {
@@ -23,7 +30,7 @@ public class ReservedCustomers {
         this.customer = customer;
         setReservedActivities();
     }
-    
+
     public void setReservedActivities() {
         int choice = 0;
         Scanner sn = new Scanner(System.in);
@@ -36,40 +43,40 @@ public class ReservedCustomers {
         System.out.println("\t 6. PHOTOSET");
         System.out.print("Enter your number activities: ");
 
-            choice = sn.nextInt();
-            switch (choice) {
-                case 1:
-                    this.resAct = Activities.GROOMING;
-                    break;
-                   
-                case 2:
-                    this.resAct = Activities.PLAYTIME;
-                    break;
-                case 3:
-                    this.resAct = Activities.GARDEN;
-                     break;
-                case 4:
-                    this.resAct = Activities.EXERCISE;
-                    break;
-                case 5:
-                    this.resAct= Activities.MESSAGEANDSPA;
-                    break;
-                case 6:
-                    this.resAct= Activities.PHOTOSET;
-                     break;
-                   
-            }
-            if(choice <= 6 ) {
+        choice = sn.nextInt();
+        switch (choice) {
+            case 1:
+                this.resAct = Activities.GROOMING;
+                break;
 
-                System.out.print("---------Activities for your pet: ");
-                System.out.print( resAct);
-                System.out.print("-------------------"+"\n");
-            }
-           
-            setStatus(ReservedStatus.PROCESSING);
-                    } 
+            case 2:
+                this.resAct = Activities.PLAYTIME;
+                break;
+            case 3:
+                this.resAct = Activities.GARDEN;
+                break;
+            case 4:
+                this.resAct = Activities.EXERCISE;
+                break;
+            case 5:
+                this.resAct = Activities.MESSAGEANDSPA;
+                break;
+            case 6:
+                this.resAct = Activities.PHOTOSET;
+                break;
 
-    public RoomType getResRoom(){
+        }
+        if (choice <= 6) {
+
+            System.out.print("---------Activities for your pet: ");
+            System.out.print(resAct);
+            System.out.print("-------------------" + "\n");
+        }
+
+        setStatus(ReservedStatus.PROCESSING);
+    }
+
+    public RoomType getResRoom() {
         return this.resRoom;
     }
 
@@ -92,10 +99,11 @@ public class ReservedCustomers {
     public void setAmount(int amount) {
         this.amount = amount;
     }
-    
+
     public int getAmount() {
         return this.amount;
     }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -112,7 +120,5 @@ public class ReservedCustomers {
 
         return sb.toString();
     }
-
-
 
 }
