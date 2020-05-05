@@ -14,15 +14,17 @@ import java.util.Scanner;
 
 public class Test {    
     static String menu = "-----------<<PETS HOTEL>>----------\n"
-            + "1. Booking The Hotel\n"  //create customer, add pet,add activities , addroom 
-            + "2. Check room\n" //เช็คห้องว่าว่างมั้ย
+            + "1. Booking The Hotel\n"  //create customer, add pet,add activities , addroom ,check room
+            + "2. Check room\n" //เช็คห้องว่าว่างมั้ย คือ HotelUpdate()
             + "3. Check your Status\n" //กรอกไอดี
-            + "4. Cancel Booking\n"
+            + "4. Cancel Booking\n" // Cancel() obj.hotel , obj.customer +  
             + "0. exit\n"
             + ">>>>>Select menu: ";
     static Scanner input = new Scanner(System.in);
 
-    public static void main(String[] args) {       
+    public static void main(String[] args) {    
+        
+        
         int select;
         do {  
             System.out.println("Select");
